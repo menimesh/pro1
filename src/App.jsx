@@ -7,11 +7,13 @@ import Setting from './components/Admin/Setting'
 import Logout from './components/Admin/Logout'
 import Dashboard from './components/Admin/Dashboard'
 import Customers from './components/Admin/Customers'
+import Admin from './components/Admin/index'
 import { 
   BrowserRouter,
   Routes,
   Route
  } from 'react-router-dom'
+
 const App = () => {
   return (
    <BrowserRouter>
@@ -24,6 +26,7 @@ const App = () => {
     <Route path='logout' element={<Logout/>}/>
     <Route path='dashboard' element={<Dashboard/>}/>
     <Route path='customers' element={<Customers/>}/>
+    <Route path="auth" element={<Admin/>} />
     </Route>
     
    </Routes>
