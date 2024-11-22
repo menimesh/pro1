@@ -8,7 +8,7 @@ const Layout = ({ children }) => {
         { label: 'Category', href: '/category' },
         { label: 'Contact us', href: '/contact-us' }
     ]
-    const [darkMode,setDarkMode]=useState(false);
+    
 
     return (
         <div>
@@ -46,6 +46,7 @@ const Layout = ({ children }) => {
                     </ul>
                 </div>
             </nav>
+            {children}
             <footer className="bg-orange-600 mt-5 py-16">
                 <div className="w-10/12 mx-auto grid grid-cols-3 gap-8 text-white">
                    
