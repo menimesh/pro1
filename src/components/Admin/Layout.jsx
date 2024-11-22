@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 
 const Layout = ({children}) => {
@@ -43,7 +43,12 @@ const Layout = ({children}) => {
       link: "/admin/logout"
     }
   ]
+  const logout = (e) => {
+    e.preventDefault();
+    navigate('/admin/auth'); // Correctly navigate to the login page
+};
 
+const navigate=useNavigate();
   return (
     <div>
     
@@ -97,7 +102,7 @@ const Layout = ({children}) => {
                     <h1 className='font-semibold'>Admin</h1>
                     <p className='text-gray-500'>admin@admin.com</p>
                     <div className='h-px bg-gray-200 my-4'>
-                        <button className=''>
+                        <button className='' onClick={logout}>
                     <i class="ri-logout-circle-r-line"></i>
                             Logout</button>
                     </div>

@@ -8,6 +8,7 @@ import Logout from './components/Admin/Logout'
 import Dashboard from './components/Admin/Dashboard'
 import Customers from './components/Admin/Customers'
 import Admin from './components/Admin/index'
+import Home from './components/User/Home'
 import { 
   BrowserRouter,
   Routes,
@@ -27,6 +28,8 @@ const App = () => {
     <Route path='dashboard' element={<Dashboard/>}/>
     <Route path='customers' element={<Customers/>}/>
     <Route path="auth" element={<Admin/>} />
+    </Route>
+    <Route path='/' element={<Home/>}>
     </Route>
     
    </Routes>
