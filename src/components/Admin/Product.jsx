@@ -8,7 +8,7 @@ const Products = () => {
   const [cart, setCart] = useState([]);
   const [cartItems, setCartItems] = useState([]);
 
-  // Fetch products from the API
+
   const fetchCart = async () => {
     try {
       const response = await axios.get('https://fakestoreapi.com/products');
@@ -19,12 +19,12 @@ const Products = () => {
     }
   };
 
-  // Add product to cart
+  
   const addToCart = (item) => {
     setCartItems([...cartItems, item]);
   };
 
-  // Remove item from cart
+
   const removeFromCart = (itemId) => {
     setCartItems(cartItems.filter((item) => item.id !== itemId));
   };
