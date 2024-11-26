@@ -9,6 +9,8 @@ import Dashboard from './components/Admin/Dashboard'
 import Customers from './components/Admin/Customers'
 import Admin from './components/Admin/index'
 import Home from './components/User/Home'
+import Product from './components/User/Products'
+import Category from './components/User/Category'
 import { 
   BrowserRouter,
   Routes,
@@ -16,11 +18,19 @@ import {
  } from 'react-router-dom'
 
 const App = () => {
+
   return (
-   <BrowserRouter>
+    <BrowserRouter>
+
    <Routes>
+    <Route path='/' element={<Home/>}/>
+    <Route path='/products' element={<Product/>}/>
+    <Route path='/category' element={<Category/>}/>
+
+
+
     <Route path='/admin' >
-    <Route path='products' element={<Products/>}/>
+    <Route path='products' element={<Products />}/>
     <Route path='orders' element={<Orders/>}/>
     <Route path='payments' element={<Payments/>}/>
     <Route path='settings' element={<Setting/>}/>
@@ -29,8 +39,7 @@ const App = () => {
     <Route path='customers' element={<Customers/>}/>
     <Route path="auth" element={<Admin/>} />
     </Route>
-    <Route path='/' element={<Home/>}>
-    </Route>
+    
     
    </Routes>
    </BrowserRouter>

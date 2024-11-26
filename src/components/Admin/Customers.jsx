@@ -1,8 +1,7 @@
-import React, {  useState,createContext } from 'react';
+import React, {  useState } from 'react';
 import Layout from './Layout';
 import image from "../img/customer.jpg";
 
- 
 
 const Customers = () => {
     const [customer, setCustomer] = useState([
@@ -19,7 +18,7 @@ const Customers = () => {
     
         <Layout>
          
-
+     
             <div className="text-xl font-semibold">Customer Orders</div>
             <div className="mt-6">
                 <table className="w-full">

@@ -17,7 +17,7 @@ import 'swiper/css/navigation';
 // import required modules
 import { Navigation } from 'swiper/modules';
 
-const Home = (children) => {
+const Products = (children) => {
   const [cart,setCart]=useState([])
   const [add,setAdd]=useState([]);
   const [show,setShow]=useState(true)
@@ -40,23 +40,13 @@ useEffect(()=>{
   const [products,setProducts]=useState([]);
   return (
     <Layout>
-     <div className='mx-60'>
-
-
-     <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
-        <SwiperSlide><img src={slider1} alt="" className=''/></SwiperSlide>
-        <SwiperSlide><img src={slider2} alt="" /></SwiperSlide>
-        <SwiperSlide><img src={slider3} alt="" /></SwiperSlide>
-
-      </Swiper>
-      
-     </div>
-     <div className='md:p-6 p-8'>
-        <h1 className="text-3xl font-bold text-center">Latest Products</h1>
+  
+     <div className='p-6'>
+        <h1 className="text-3xl font-bold text-center">All Products</h1>
         
-        <p className=" text-center mx-auto text-gray-600 md:w-7/12 mt-2 mb-6">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Error cumque cupiditate, nisi facere neque repellendus, ad ilorem
+        <p className=" text-center mx-auto text-gray-600 w-7/12 mt-2 mb-6">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Error cumque cupiditate, nisi facere neque repellendus, ad ilorem
         psum totam ut id eveniet quo consequuntur tempore saepe, sit earum. Ad, molestiae voluptates. Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum sint aliquam, fugiat sequi consequatur, ipsam libero veritatis architecto at porro, obcaecati quam repellendus! Sunt inventore neque quaerat ad qui unde!</p>
-      <div className="md:w-10/12 mx-auto grid md:grid-cols-4 gap-16">
+      <div className="w-10/12 mx-auto grid md:grid-cols-4 gap-16">
     {
       cart.map((item,index)=>(
         <div key={index} className='bg-white shadow-lg'>
@@ -76,9 +66,9 @@ useEffect(()=>{
     }
       </div>
       </div>
-
     </Layout>
+
   )
 }
 
-export default Home
+export default Products
