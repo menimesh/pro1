@@ -43,7 +43,7 @@ useEffect(()=>{
      <div className='mx-60'>
 
 
-     <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
+     <Swiper navigation={true} modules={[Navigation]} className="mySwiper z-[-1]">
         <SwiperSlide><img src={slider1} alt="" className=''/></SwiperSlide>
         <SwiperSlide><img src={slider2} alt="" /></SwiperSlide>
         <SwiperSlide><img src={slider3} alt="" /></SwiperSlide>
