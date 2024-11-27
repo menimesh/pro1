@@ -58,6 +58,10 @@ useEffect(()=>{
               <button className='bg-green-500 w-full py-2 text-white font-semibold mt-4'>
                 Buy Now
               </button>
+              <button className='bg-red-500 w-full py-2 text-white font-semibold mt-4'>
+              <i class="ri-shopping-cart-2-fill mr-2"></i>
+                Add to Cart
+              </button>
         
           </div>
          

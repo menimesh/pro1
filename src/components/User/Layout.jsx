@@ -9,7 +9,7 @@ const Layout = ({ children }) => {
         { label: 'Home', href: '/' },
         { label: 'Products', href: '/products' },
         { label: 'Category', href: '/category' },
-        { label: 'Contact us', href: '/contact-us' }
+        { label: 'Contact us', href: '/contact' }
     ];
 
     return (
@@ -37,14 +37,22 @@ const Layout = ({ children }) => {
                         ))}
 
                         <li>
-                            <button className="block px-4 py-2 text-sm font-medium rounded border border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white transition duration-300">
+<Link to='/login'>
+<button 
+                            to
+                            className="block px-4 py-2 text-sm font-medium rounded border border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white transition duration-300">
                                 Login
                             </button>
+</Link>
+                        
                         </li>
                         <li>
-                            <button className="bg-blue-600 text-white text-sm font-medium block px-6 py-2 rounded hover:bg-blue-700 transition duration-300">
+                        <Link to='/signup'>
+                        <button className="bg-blue-600 text-white text-sm font-medium block px-6 py-2 rounded hover:bg-blue-700 transition duration-300">
                                 Register
                             </button>
+                        </Link>
+                           
                         </li>
                     </ul>
                 </div>
