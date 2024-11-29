@@ -9,27 +9,25 @@ const auth = getAuth(firebaseAppConfig);
 
 const Layout = ({ children }) => {
   const [open, setOpen] = useState(false);
-  const [acc, setAcc] = useState(false);
   const [session, setSession] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setSession(user);
-      } else {
-        setSession(null);
-      }
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setSession(user);
+      setLoading(false);
     });
+
+    return () => unsubscribe();
   }, []);
 
-  const handleLogout = () => {
-    auth.signOut()
-      .then(() => {
-        setSession(null);
-      })
-      .catch((error) => {
-        console.error("Error logging out: ", error);
-      });
+  const handleLogout = async () => {
+    try {
+      await auth.signOut();
+      setSession(null);
+    } catch (error) {
+      console.error("Error logging out:", error);
+    }
   };
 
   const menu = [
@@ -39,9 +37,9 @@ const Layout = ({ children }) => {
     { label: 'Contact us', href: '/contact' },
   ];
 
-  if (session === null) {
+  if (loading) {
     return (
-      <div className="bg-gray-100 h-full fixed top-0 left-0 w-full flex justify-center items-center">
+      <div className="bg-gray-100 h-screen fixed top-0 left-0 w-full flex justify-center items-center">
         <span className="relative flex h-3 w-3">
           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
           <span className="relative inline-flex rounded-full h-3 w-3 bg-sky-500"></span>
@@ -52,7 +50,8 @@ const Layout = ({ children }) => {
 
   return (
     <div>
-      <nav className="shadow-lg mt-10 border rounded-lg w-5/12 mx-auto bg-white h-20">
+      {/* Navigation */}
+      <nav className="shadow-lg mt-10 border rounded-lg w-11/12 mx-auto bg-white h-20">
         <div className="flex items-center justify-between px-6 h-full">
           <img src={logo} alt="Logo" className="w-14" />
           <button className="md:hidden" onClick={() => setOpen(!open)}>
@@ -67,7 +66,12 @@ const Layout = ({ children }) => {
               </li>
             ))}
 
-            {!session && (
+            {session ? (
+              <button className="relative" onClick={() => setOpen(!open)}>
+                <img src={userImage} alt="User Profile" className="w-10 h-10 rounded-full" />
+                {/* Add dropdown here if needed */}
+              </button>
+            ) : (
               <>
                 <li>
                   <Link to="/login">
@@ -85,33 +89,37 @@ const Layout = ({ children }) => {
                 </li>
               </>
             )}
-
-            {session && (
-              <>
-                <button className="relative" onClick={() => setAcc(!acc)}>
-                  <img src={userImage} alt="" className="w-10 h-10 rounded-full" />
-                </button>
-                {/* {acc && (
-                  <div className="w-[150px] h-[180px] p-4 bg-gray-500 absolute top-[40px] left-0 shadow-lg z-[10000]">
-                    <div>
-                      <h1 className="font-semibold text-white">Admin</h1>
-                      <p className="text-white-500">admin@admin.com</p>
-                      <div className="h-px bg-gray-200 my-4">
-                        <button onClick={handleLogout} className="text-white">
-                          <i className="ri-logout-circle-r-line"></i> Logout
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                )} */}
-              </>
-            )}
           </ul>
         </div>
       </nav>
 
+      {/* Mobile Sidebar */}
+      {open && (
+        <div className="fixed inset-0 z-40">
+          <aside className="bg-slate-900 shadow-lg fixed top-0 left-0 w-[250px] h-full z-50">
+            <div className="text-white p-4">
+              <button className="text-white text-2xl float-right" onClick={() => setOpen(false)}>&times;</button>
+              <ul className="mt-8 space-y-4">
+                {menu.map((item, index) => (
+                  <li key={index}>
+                    <Link to={item.href} className="text-white hover:text-blue-400 transition duration-300">
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </aside>
+          <div
+            className="fixed inset-0 bg-black opacity-50"
+            onClick={() => setOpen(false)}
+          />
+        </div>
+      )}
+
       {children}
 
+      {/* Footer */}
       <footer className="bg-orange-600 mt-5 py-16 md:py-10">
         <div className="w-10/12 mx-auto grid md:grid-cols-3 gap-8 text-white md:gap-0 gap-16">
           <div>
@@ -137,29 +145,12 @@ const Layout = ({ children }) => {
 
           <div>
             <h1 className="text-lg font-bold mb-4">Contact Us</h1>
-            <p className="text-sm leading-relaxed">Address: 123 Mid Baneshwor, Kathmandu, Nepal</p>
+            <p className="text-sm leading-relaxed">Address: 123 Mid Baneshwor, Kathmandu</p>
             <p className="text-sm leading-relaxed">Phone: +977-980-0000000</p>
             <p className="text-sm leading-relaxed">Email: info@example.com</p>
           </div>
         </div>
       </footer>
-
-      {open && (
-        <aside className="md:hidden bg-slate-900 shadow-lg fixed top-0 left-0 w-[250px] h-full">
-          <div className="text-white p-4">
-            <button className="text-white text-2xl float-right" onClick={() => setOpen(false)}>&times;</button>
-            <ul className="mt-8 space-y-4">
-              {menu.map((item, index) => (
-                <li key={index}>
-                  <Link to={item.href} className="text-white hover:text-blue-400 transition duration-300">
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </aside>
-      )}
     </div>
   );
 };
