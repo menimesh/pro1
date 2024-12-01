@@ -16,6 +16,7 @@ import Login from './components/User/Login'
 import Signup from './components/User/Signup'
 import Contact from './components/User/Contact'
 import Preguard from './components/guard/Preguard'
+import Cart from './components/User/Cart'
 import { 
   BrowserRouter,
   Routes,
@@ -31,6 +32,8 @@ const App = () => {
     <Route path='/' element={<Home/>}/>
     <Route path='/products' element={<Product/>}/>
     <Route path='/category' element={<Category/>}/>
+    <Route path='/cart' element={<Cart/>}/>
+
     <Route element={<Preguard/>}>
     <Route path='/login' element={<Login/>}/>
     <Route path='/signup' element={<Signup/>}/>
