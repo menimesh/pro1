@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1399c29c-6b99-4e15-833e-7284e36f9379" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/components/User/Home.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/User/Home.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/User/Layout.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/User/Layout.jsx" afterDir="false" />
-    </list>
+    <list default="true" id="1399c29c-6b99-4e15-833e-7284e36f9379" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 1
+}]]></component>
   <component name="ProjectId" id="2pWWutlaDabZXRdNk85Bl6aaQh6" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -19,7 +23,9 @@
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "nodejs_package_manager_path": "npm"
+    "git-widget-placeholder": "main",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -31,9 +37,12 @@
       <option name="presentableId" value="Default" />
       <updated>1732882540271</updated>
       <workItem from="1732882542704" duration="54000" />
+      <workItem from="1733029331549" duration="40000" />
     </task>
     <servers />
   </component>
+  <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
+  <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>

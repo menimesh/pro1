@@ -2,7 +2,7 @@ import logo from '../img/logo.avif';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import firebaseAppConfig from '../../util/firebase-config';
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
 import userImage from '../img/user.jpg';
 
 const auth = getAuth(firebaseAppConfig);
@@ -11,6 +11,7 @@ const Layout = ({ children }) => {
   const [open, setOpen] = useState(false);
   const [session, setSession] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [log, setLog] = useState(false);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -23,7 +24,7 @@ const Layout = ({ children }) => {
 
   const handleLogout = async () => {
     try {
-      await auth.signOut();
+      await signOut(auth);
       setSession(null);
     } catch (error) {
       console.error("Error logging out:", error);
@@ -67,9 +68,21 @@ const Layout = ({ children }) => {
             ))}
 
             {session ? (
-              <button className="relative" onClick={() => setOpen(!open)}>
-                <img src={userImage} alt="User Profile" className="w-10 h-10 rounded-full" />
-                {/* Add dropdown here if needed */}
+              <button className="relative">
+                <i className="ri-user-fill text-xl" onClick={() => setLog(!log)}></i>
+                {log && (
+                  <div className="flex flex-col items-start absolute top-12 right-0 z-10 bg-white w-[200px] shadow-xl">
+                    <Link to="/profile" className="w-full p-4 hover:bg-gray-200">
+                      <i className="ri-user-line mr-3">My profile</i>
+                    </Link>
+                    <Link to="/cart" className="w-full p-4 hover:bg-gray-200">
+                      <i className="ri-shopping-cart-line">Cart</i>
+                    </Link>
+                    <button className="w-full p-4 hover:bg-gray-200" onClick={handleLogout}>
+                      <i className="ri-logout-circle-line"></i> Logout
+                    </button>
+                  </div>
+                )}
               </button>
             ) : (
               <>

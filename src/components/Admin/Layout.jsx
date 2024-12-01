@@ -9,12 +9,12 @@ const Layout = ({children}) => {
   const menu = [
     {
       label: "Dashboard",
-      icon: <i class="ri-dashboard-line"></i>,
+      icon: <i className="ri-dashboard-line"></i>,
       link: "/admin/dashboard"
     },
     {
       label: "Customers",
-      icon : <i class="ri-user-smile-line"></i>,
+      icon : <i className="ri-user-smile-line"></i>,
       link : "/admin/customers"
     },
     {
@@ -29,17 +29,17 @@ const Layout = ({children}) => {
     },
     {
       label: "Payments",
-      icon: <i class="ri-bank-card-line"></i>,
+      icon: <i className="ri-bank-card-line"></i>,
       link: '/admin/payments'
     },
     {
       label: "Setting",
-      icon:<i class="ri-settings-2-line"></i>,
+      icon:<i className="ri-settings-2-line"></i>,
       link: '/admin/settings'
     },
     {
       label: "Logout",
-      icon: <i class="ri-logout-circle-r-line"></i>,
+      icon: <i className="ri-logout-circle-r-line"></i>,
       link: "/admin/logout"
     }
   ]

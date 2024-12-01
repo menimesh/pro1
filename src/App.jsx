@@ -15,6 +15,7 @@ import Category from './components/User/Category'
 import Login from './components/User/Login'
 import Signup from './components/User/Signup'
 import Contact from './components/User/Contact'
+import Preguard from './components/guard/Preguard'
 import { 
   BrowserRouter,
   Routes,
@@ -30,13 +31,11 @@ const App = () => {
     <Route path='/' element={<Home/>}/>
     <Route path='/products' element={<Product/>}/>
     <Route path='/category' element={<Category/>}/>
+    <Route element={<Preguard/>}>
     <Route path='/login' element={<Login/>}/>
     <Route path='/signup' element={<Signup/>}/>
+    </Route>
     <Route path='/contact' element={<Contact/>}/>
-
-
-    
-
 
     <Route path='/admin' >
     <Route path='products' element={<Products />}/>
