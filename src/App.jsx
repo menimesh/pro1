@@ -22,6 +22,7 @@ import {
   Routes,
   Route
  } from 'react-router-dom'
+import Profile from './components/User/Profile'
 
 const App = () => {
 
@@ -32,9 +33,13 @@ const App = () => {
     <Route path='/' element={<Home/>}/>
     <Route path='/products' element={<Product/>}/>
     <Route path='/category' element={<Category/>}/>
-    <Route path='/cart' element={<Cart/>}/>
+
+
+
 
     <Route element={<Preguard/>}>
+    <Route path='/cart' element={<Cart/>}/>
+    <Route path='/profile' element={<Profile/>}/>
     <Route path='/login' element={<Login/>}/>
     <Route path='/signup' element={<Signup/>}/>
     </Route>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, Navigate, Outlet } from 'react-router-dom';
 import firebaseAppConfig from '../../util/firebase-config';
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { getAuth, onAuthStateChanged, updateProfile } from 'firebase/auth';
 
 const auth = getAuth(firebaseAppConfig);
 
@@ -10,10 +10,12 @@ const Preguard = () => {
   const [session, setSession] = useState(null);
 
   useEffect(() => {
+    
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         setSession(true);
         console.log('User is logged in');
+        console.log(user)
       } else {
         setSession(false);
         console.log('User is not logged in');

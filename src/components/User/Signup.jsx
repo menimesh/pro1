@@ -3,7 +3,7 @@ import Swal from 'sweetalert2';
 import { Link,useNavigate} from 'react-router-dom';
 import imgForm from "../img/adminback.png";
 import firebaseAppConfig from '../../util/firebase-config';
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import { getAuth, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 
 const auth = getAuth(firebaseAppConfig);
 
@@ -19,11 +19,12 @@ const Signup = () => {
     const [loader,setLoader]= useState(false)
 
     const signup = async (e) => {
-        e.preventDefault();
         
         try {
+            e.preventDefault();
             setLoader(true)
             const user = await createUserWithEmailAndPassword(auth, form.email, form.password);
+            await updateProfile(auth.currentUser,{displayName:form.fullname})
             Swal.fire({
                 position: "top-end",
                 icon: "success",

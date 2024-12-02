@@ -30,7 +30,7 @@ const Layout = ({ children }) => {
       console.error("Error logging out:", error);
     }
   };
-
+console.log(session)
   const menu = [
     { label: 'Home', href: '/' },
     { label: 'Products', href: '/products' },
@@ -72,8 +72,9 @@ const Layout = ({ children }) => {
                 <i className="ri-user-fill text-xl" onClick={() => setLog(!log)}></i>
                 {log && (
                   <div className="flex flex-col items-start absolute top-12 right-0 z-10 bg-white w-[200px] shadow-xl">
+                   
                     <Link to="/profile" className="w-full p-4 hover:bg-gray-200">
-                      <i className="ri-user-line mr-3">My profile</i>
+                      <i className="ri-user-line mr-3">{session.displayName}</i>
                     </Link>
                     <Link to="/cart" className="w-full p-4 hover:bg-gray-200">
                       <i className="ri-shopping-cart-line">Cart</i>
