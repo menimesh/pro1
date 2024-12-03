@@ -4,15 +4,15 @@ import avatar from '../img/customer.jpg';
 import { onAuthStateChanged, getAuth } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import firebaseAppConfig from '../../util/firebase-config';
-import { getFirestore,collection,addDoc,where,getDocs,query } from 'firebase/firestore';
+import { getFirestore, collection, addDoc, where, getDocs, query } from 'firebase/firestore';
 import Swal from 'sweetalert2';
-const auth = getAuth(firebaseAppConfig);
-const db=getFirestore(firebaseAppConfig);
 
+const auth = getAuth(firebaseAppConfig);
+const db = getFirestore(firebaseAppConfig);
 
 const Profile = () => {
   const navigate = useNavigate();
-  
+
   const [session, setSession] = useState(null);
   const [formValue, setFormValue] = useState({
     fullname: '',
@@ -25,31 +25,48 @@ const Profile = () => {
     city: '',
     country: '',
     code: '',
-    userID:''
+    userID: ''
   });
 
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        navigate('/Profile');
-        setSession(user);
-        setFormValue({
-          fullname: user.displayName || '',
-          email: user.email || '',
-          mobile: '',
-        });
-        setAddressValue({
-          ...addressValue,
-          userID: user.uid
-        })
-       const ref=collection(db,"addresses")
-       query(ref,where("userID","==",user.uid))
-      } else {
-        setSession(false);
-        navigate('/login');
-      }
-    });
-  }, []);
+    const req = async () => {
+      onAuthStateChanged(auth, async (user) => {
+        if (user) {
+          setSession(user);
+          setFormValue({
+            fullname: user.displayName || '',
+            email: user.email || '',
+            mobile: '',
+          });
+
+          setAddressValue((prevState) => ({
+            ...prevState,
+            userID: user.uid
+          }));
+
+          // Fetch the user's address from Firestore
+          const ref = collection(db, 'addresses');
+          const q = query(ref, where('userID', '==', user.uid));
+          const snapshot = await getDocs(q);
+          
+
+          // If the user has addresses, populate the address form
+          snapshot.forEach((doc) => {
+            const addressData = doc.data();
+            setAddressValue({
+              ...addressValue,
+              ...doc.data()
+            })
+          });
+        } else {
+          setSession(false);
+          navigate('/login');
+        }
+      });
+    };
+
+    req(); // Call the async function
+  }, [navigate]);
 
   const handleProfileFormValue = (e) => {
     const input = e.target;
@@ -73,25 +90,23 @@ const Profile = () => {
     });
   };
 
-  const saveAddress = async(e) => {
-    try{
+  const saveAddress = async (e) => {
+    try {
       e.preventDefault();
-      
-      await addDoc(collection(db,"addresses"),addressValue)
-     new Swal({
-      icon:'sucess',
-      title: 'Address Saved!'
 
-     })
-      
-    }catch(err){
-       new Swal({
-        icon:'error',
+      await addDoc(collection(db, 'addresses'), addressValue);
+
+      new Swal({
+        icon: 'success',
+        title: 'Address Saved!',
+      });
+    } catch (err) {
+      new Swal({
+        icon: 'error',
         title: 'Failed',
-        text: err.message
-       })
+        text: err.message,
+      });
     }
-    // Save address to the database or handle accordingly
   };
 
   return (
@@ -103,7 +118,7 @@ const Profile = () => {
         </div>
         <hr className='my-6' />
         <div>
-          <img src={avatar} alt="" className='rounded h-[150px] w-[150px] mx-auto'/>
+          <img src={avatar} alt="" className='rounded h-[150px] w-[150px] mx-auto' />
         </div>
         <form className='grid grid-cols-2 sm:grid-cols-2 gap-6'>
           <div className='flex flex-col gap-2'>
@@ -145,13 +160,13 @@ const Profile = () => {
               onChange={handleProfileFormValue}
             />
           </div>
-          
         </form>
 
         <hr className='my-6' />
-        
+
         <div className='mx-auto rounded h-[50px] w-[170px] text-xl font-bold text-gray-600'>
-          Delivery address</div>
+          Delivery address
+        </div>
 
         <form className='grid grid-cols-2 gap-6' onSubmit={saveAddress}>
           <div className='flex flex-col gap-2'>
@@ -210,7 +225,7 @@ const Profile = () => {
             <i className="ri-save-line mr-2"></i> Save
           </button>
         </form>
-        
+
       </div>
     </Layout>
   );
