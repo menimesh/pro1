@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import firebaseAppConfig from '../../util/firebase-config';
 import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
 import userImage from '../img/user.jpg';
+import Cart from './Cart';
 
 const auth = getAuth(firebaseAppConfig);
 
@@ -76,7 +77,7 @@ console.log(session)
                     <Link to="/profile" className="w-full p-4 hover:bg-gray-200">
                       <i className="ri-user-line mr-3">{session.displayName}</i>
                     </Link>
-                    <Link to="/cart" className="w-full p-4 hover:bg-gray-200">
+                    <Link to="/Cart" className="w-full p-4 hover:bg-gray-200">
                       <i className="ri-shopping-cart-line">Cart</i>
                     </Link>
                     <button className="w-full p-4 hover:bg-gray-200" onClick={handleLogout}>

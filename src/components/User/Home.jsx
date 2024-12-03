@@ -6,7 +6,7 @@ import slider3 from "../img/slider3.jpg";
 import axios from 'axios';
 
 // Import Swiper React components and styles
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { Swiper, SwiperSlide}  from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import { Navigation } from 'swiper/modules';
