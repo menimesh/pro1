@@ -1,22 +1,22 @@
-import React, { useState } from 'react';
-import { Link,useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import imgForm from "../img/adminback.png";
-import firebaseAppConfig from '../../util/firebase-config';
-import { signInWithEmailAndPassword, getAuth } from 'firebase/auth';
+import firebaseAppConfig from "../../util/firebase-config";
+import { signInWithEmailAndPassword, getAuth } from "firebase/auth";
 
 const auth = getAuth(firebaseAppConfig);
 const Login = () => {
-  const navigate=useNavigate();
+  const navigate = useNavigate();
   const [formValue, setFormValue] = useState({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   });
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [loader,setLoader]=useState(false);
+  const [loader, setLoader] = useState(false);
 
   const handleChange = (e) => {
-    setError('')
+    setError("");
     const { name, value } = e.target;
     setFormValue((prev) => ({
       ...prev,
@@ -27,16 +27,21 @@ const Login = () => {
   const handleLogin = async (e) => {
     try {
       e.preventDefault();
-      setLoader(true)
-      const user = await signInWithEmailAndPassword(auth, formValue.email, formValue.password);
+      setLoader(true);
+      const user = await signInWithEmailAndPassword(
+        auth,
+        formValue.email,
+        formValue.password
+      );
       console.log("Logged in user:", user);
-      navigate('/')
+      navigate("/");
       // Clear previous errors
     } catch (err) {
-      const errorMessage = err.message || 'An error occurred. Please try again.';
+      const errorMessage =
+        err.message || "An error occurred. Please try again.";
       setError(errorMessage);
-    }finally{
-      setLoader(false)
+    } finally {
+      setLoader(false);
     }
   };
 
@@ -45,10 +50,12 @@ const Login = () => {
       <img src={imgForm} alt="Background" className="w-full h-full" />
       <div className="flex flex-col justify-center p-16">
         <h1 className="text-4xl font-bold">Login</h1>
-        <p className="text-lg text-gray-600">Enter your details</p>
+        <p className="text-lg text-gray-600">Enter your Login Details</p>
         <form className="mt-8 space-y-8" onSubmit={handleLogin}>
           <div className="flex flex-col">
-            <label htmlFor="email" className="font-semibold text-lg mb-1">Email</label>
+            <label htmlFor="email" className="font-semibold text-lg mb-1">
+              Email
+            </label>
             <input
               onChange={handleChange}
               type="email"
@@ -61,10 +68,12 @@ const Login = () => {
             />
           </div>
           <div className="flex flex-col relative">
-            <label htmlFor="password" className="font-semibold text-lg mb-1">Password</label>
+            <label htmlFor="password" className="font-semibold text-lg mb-1">
+              Password
+            </label>
             <input
               onChange={handleChange}
-              type={showPassword ? 'text' : 'password'}
+              type={showPassword ? "text" : "password"}
               name="password"
               value={formValue.password}
               id="password"
@@ -77,26 +86,28 @@ const Login = () => {
               className="absolute top-12 right-5 rounded h-5 w-6 hover:bg-gray-300 hover:text-blue-600"
               onClick={() => setShowPassword((prev) => !prev)}
             >
-              <i className={showPassword ? "ri-eye-off-line" : "ri-eye-line"}></i>
+              <i
+                className={showPassword ? "ri-eye-off-line" : "ri-eye-line"}
+              ></i>
             </button>
           </div>
-     {
-      loader ?
-      <h1 className='text-lg font-semibold text-gray-600'></h1>
-      :
-      <button
-            type="submit"
-            className="bg-blue-600 text-white py-3 font-semibold px-8 rounded hover:bg-rose-600"
-            disabled={!formValue.email || !formValue.password}
-          >
-            Login
-          </button>
-      
-     }
-          
+          {loader ? (
+            <h1 className="text-lg font-semibold text-gray-600"></h1>
+          ) : (
+            <button
+              type="submit"
+              className="bg-blue-600 text-white py-3 font-semibold px-8 rounded hover:bg-rose-600"
+              disabled={!formValue.email || !formValue.password}
+            >
+              Login
+            </button>
+          )}
         </form>
         <div>
-          Don't have an account? <Link className="text-blue-600" to="/signup">Register Now</Link>
+          Don't have an account?{" "}
+          <Link className="text-blue-600" to="/signup">
+            Register Now
+          </Link>
         </div>
         {error && (
           <div className="mt-4 bg-rose-600 p-2 rounded shadow font-semibold text-white animate__animated animate__pulse">
